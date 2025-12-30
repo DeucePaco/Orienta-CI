@@ -1,1 +1,4 @@
 project_id = "bzryqcvyqyaanphurdoj"
+
+[functions.orientation-assistant]
+verify_jwt = false

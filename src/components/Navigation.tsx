@@ -19,7 +19,8 @@ const Navigation = () => {
         <div className="container mx-auto px-4">
           <div className="flex h-16 items-center justify-between">
             <Link to="/" className="flex items-center space-x-2">
-              <GraduationCap className="h-8 w-8 text-primary" />
+              {/* <GraduationCap className="h-8 w-8 text-primary" /> */}
+              <img src="/BOY.jpeg" alt="Logo Boy" className="h-8 w-8 rounded-lg object-cover" />
               <span className="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 Boy
               </span>

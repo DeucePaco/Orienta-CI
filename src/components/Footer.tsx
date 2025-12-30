@@ -1,4 +1,4 @@
-import { Link } from "wouter";
+import { Link } from "react-router-dom";
 import { GraduationCap, Mail, Phone, MapPin } from "lucide-react";
 import { SiFacebook, SiInstagram, SiLinkedin } from "react-icons/si";
 import { Button } from "@/components/ui/button";
@@ -10,18 +10,18 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <Link href="/" className="flex items-center gap-2 mb-4">
+            <Link to="/" className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
                 <GraduationCap className="h-6 w-6 text-primary-foreground" />
               </div>
               <span className="font-serif font-bold text-xl">Boy</span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
-              Ta plateforme de confiance pour l'orientation scolaire et universitaire en Côte d'Ivoire.
+              Ta plateforme de confiance pour l'orientation universitaire en Côte d'Ivoire.
             </p>
             <div className="flex gap-2">
               <Button size="icon" variant="ghost" data-testid="link-facebook">
-                <SiFacebook className="h-4 w-4" />
+                <SiFacebook className="h-7 w-7" />
               </Button>
               <Button size="icon" variant="ghost" data-testid="link-instagram">
                 <SiInstagram className="h-4 w-4" />
@@ -36,27 +36,29 @@ export function Footer() {
             <h4 className="font-serif font-semibold mb-4">Liens utiles</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link href="/etablissements" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/etablissements" className="text-muted-foreground hover:text-foreground transition-colors">
                   Établissements
                 </Link>
               </li>
               <li>
-                <Link href="/filieres" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/filieres" className="text-muted-foreground hover:text-foreground transition-colors">
                   Filières
                 </Link>
               </li>
+              {/*
               <li>
-                <Link href="/bourses" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/bourses" className="text-muted-foreground hover:text-foreground transition-colors">
                   Bourses
                 </Link>
               </li>
+              */}
               <li>
-                <Link href="/guides" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/guides" className="text-muted-foreground hover:text-foreground transition-colors">
                   Guides d'orientation
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/faq" className="text-muted-foreground hover:text-foreground transition-colors">
                   FAQ
                 </Link>
               </li>
@@ -72,7 +74,7 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Mail className="h-4 w-4 shrink-0" />
-                <span>contact@orici.ci</span>
+                <span>contact@boy.ci</span>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Phone className="h-4 w-4 shrink-0" />
@@ -101,15 +103,15 @@ export function Footer() {
         </div>
 
         <div className="border-t mt-8 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>&copy; 2025 OriCI. Tous droits réservés.</p>
+          <p>&copy; 2025 Boy. Tous droits réservés.</p>
           <div className="flex gap-4">
-            <Link href="/mentions-legales" className="hover:text-foreground transition-colors">
+            <Link to="/mentions-legales" className="hover:text-foreground transition-colors">
               Mentions légales
             </Link>
-            <Link href="/confidentialite" className="hover:text-foreground transition-colors">
+            <Link to="/confidentialite" className="hover:text-foreground transition-colors">
               Confidentialité
             </Link>
-            <Link href="/signalement" className="hover:text-foreground transition-colors">
+            <Link to="/signalement" className="hover:text-foreground transition-colors">
               Signaler un abus
             </Link>
           </div>

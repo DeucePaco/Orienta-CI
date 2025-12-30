@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { Menu, X, GraduationCap, Search } from "lucide-react";
@@ -19,7 +19,7 @@ interface HeaderProps {
 }
 
 export function Header({ onSearch }: HeaderProps) {
-  const [location] = useLocation();
+  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [openDropdown, setOpenDropdown] = useState<"universities" | "programs" | null>(null);
@@ -33,18 +33,23 @@ export function Header({ onSearch }: HeaderProps) {
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+          <Link to="/" className="flex items-center gap-2">
+             <img
+                  src="/BOY.jpeg"
+                  alt="Logo Boy"
+                  className="w-10 h-10 rounded-lg object-cover"
+              />
+            {/*<div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
               <GraduationCap className="h-6 w-6 text-primary-foreground" />
-            </div>
+            </div>*/}
             <span className="font-serif font-bold text-xl hidden sm:block">Boy</span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
             {/* Accueil simple */}
-            <Link href="/">
+            <Link to="/">
               <Button
-                variant={location === "/" ? "secondary" : "ghost"}
+                variant={location.pathname === "/" ? "secondary" : "ghost"}
                 size="sm"
                 data-testid="nav-home"
               >
@@ -59,7 +64,7 @@ export function Header({ onSearch }: HeaderProps) {
               onMouseLeave={() => setOpenDropdown(null)}
             >
               <Button
-                variant={location === "/universities" ? "secondary" : "ghost"}
+                variant={location.pathname === "/universities" ? "secondary" : "ghost"}
                 size="sm"
                 data-testid="nav-universities"
               >
@@ -68,7 +73,7 @@ export function Header({ onSearch }: HeaderProps) {
               {openDropdown === "universities" && (
                 <div className="absolute left-0 mt-2 w-56 rounded-md border bg-background shadow-md z-50">
                   <div className="py-1">
-                    <Link href="/universities">
+                    <Link to="/universities">
                       <Button variant="ghost" className="w-full justify-start text-sm">
                         Toutes les universités
                       </Button>
@@ -95,7 +100,7 @@ export function Header({ onSearch }: HeaderProps) {
               onMouseLeave={() => setOpenDropdown(null)}
             >
               <Button
-                variant={location === "/programs" ? "secondary" : "ghost"}
+                variant={location.pathname === "/programs" ? "secondary" : "ghost"}
                 size="sm"
                 data-testid="nav-programs"
               >
@@ -104,7 +109,7 @@ export function Header({ onSearch }: HeaderProps) {
               {openDropdown === "programs" && (
                 <div className="absolute left-0 mt-2 w-56 rounded-md border bg-background shadow-md z-50">
                   <div className="py-1">
-                    <Link href="/programs">
+                    <Link to="/programs">
                       <Button variant="ghost" className="w-full justify-start text-sm">
                         Toutes les filières
                       </Button>
@@ -126,9 +131,9 @@ export function Header({ onSearch }: HeaderProps) {
 
             {/* Autres items simples (Favoris, Dashboard, etc.) */}
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href}>
+              <Link key={item.href} to={item.href}>
                 <Button
-                  variant={location === item.href ? "secondary" : "ghost"}
+                  variant={location.pathname === item.href ? "secondary" : "ghost"}
                   size="sm"
                   data-testid={`nav-${item.href.replace("/", "")}`}
                 >
@@ -154,7 +159,7 @@ export function Header({ onSearch }: HeaderProps) {
 
           <div className="flex items-center gap-2">
             <ThemeToggle />
-            <Link href="/login" className="hidden sm:block">
+            <Link to="/login" className="hidden sm:block">
               <Button variant="outline" size="sm" data-testid="button-login">
                 Connexion
               </Button>
@@ -189,33 +194,33 @@ export function Header({ onSearch }: HeaderProps) {
               </div>
             </form>
             {/* Liens principaux sur mobile (sans dropdown pour simplifier) */}
-            <Link href="/universities">
+            <Link to="/universities">
               <Button
-                variant={location === "/universities" ? "secondary" : "ghost"}
+                variant={location.pathname === "/universities" ? "secondary" : "ghost"}
                 className="w-full justify-start"
               >
                 Universités
               </Button>
             </Link>
-            <Link href="/programs">
+            <Link to="/programs">
               <Button
-                variant={location === "/programs" ? "secondary" : "ghost"}
+                variant={location.pathname === "/programs" ? "secondary" : "ghost"}
                 className="w-full justify-start"
               >
                 Filières
               </Button>
             </Link>
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href}>
+              <Link key={item.href} to={item.href}>
                 <Button
-                  variant={location === item.href ? "secondary" : "ghost"}
+                  variant={location.pathname === item.href ? "secondary" : "ghost"}
                   className="w-full justify-start"
                 >
                   {item.label}
                 </Button>
               </Link>
             ))}
-            <Link href="/login" className="sm:hidden block">
+            <Link to="/login" className="sm:hidden block">
               <Button variant="outline" className="w-full" onClick={() => setMobileMenuOpen(false)}>
                 Connexion
               </Button>

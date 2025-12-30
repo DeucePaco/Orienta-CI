@@ -1,17 +1,31 @@
-import { useState, useMemo } from "react";
-import { Code, Briefcase, Stethoscope, Scale, Cpu, Calculator, Palette, Microscope, Database } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import {
+  Code,
+  Briefcase,
+  Stethoscope,
+  Scale,
+  Cpu,
+  Calculator,
+  Palette,
+  Microscope,
+  Database,
+} from "lucide-react";
 import { FiliereCard, type Filiere } from "@/components/FiliereCard";
 import { FilterSidebar, FilterGroup } from "@/components/FilterSidebar";
 import { SearchBar } from "@/components/SearchBar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Navigation from "@/components/Navigation";
 import { Footer } from "./Footer";
+import { programs } from "@/data/educationData";
+
+
 
 // todo: remove mock functionality
 const mockFilieres: Filiere[] = [
   {
-    id: "1",
-    name: "Informatique et Réseaux",
+    id: "informatique-genie-logiciel",
+    name: "Informatique et Génie Logiciel",
     domain: "Sciences et Technologies",
     level: "Licence",
     duration: "3 ans",
@@ -21,8 +35,8 @@ const mockFilieres: Filiere[] = [
     isFavorite: false,
   },
   {
-    id: "2",
-    name: "Médecine Générale",
+    id: "medecine ",
+    name: "Médecine ",
     domain: "Santé",
     level: "Doctorat",
     duration: "7 ans",
@@ -32,7 +46,7 @@ const mockFilieres: Filiere[] = [
     isFavorite: true,
   },
   {
-    id: "3",
+    id: "droit-des-affaires",
     name: "Droit des Affaires",
     domain: "Droit et Sciences Politiques",
     level: "Master",
@@ -43,7 +57,7 @@ const mockFilieres: Filiere[] = [
     isFavorite: false,
   },
   {
-    id: "4",
+    id: "genie-civil",
     name: "Génie Civil",
     domain: "Ingénierie",
     level: "Master",
@@ -54,7 +68,7 @@ const mockFilieres: Filiere[] = [
     isFavorite: false,
   },
   {
-    id: "5",
+    id: "comptabilite-et-finance",
     name: "Comptabilité et Finance",
     domain: "Commerce et Gestion",
     level: "Licence",
@@ -65,7 +79,7 @@ const mockFilieres: Filiere[] = [
     isFavorite: false,
   },
   {
-    id: "6",
+    id: "arts-graphiques",
     name: "Arts Graphiques",
     domain: "Arts et Culture",
     level: "BTS",
@@ -76,8 +90,8 @@ const mockFilieres: Filiere[] = [
     isFavorite: false,
   },
   {
-    id: "7",
-    name: "Biologie Moléculaire",
+    id: "biologie",
+    name: "Biologie",
     domain: "Sciences et Technologies",
     level: "Master",
     duration: "5 ans",
@@ -87,7 +101,7 @@ const mockFilieres: Filiere[] = [
     isFavorite: false,
   },
   {
-    id: "8",
+    id: "marketing-digital",
     name: "Marketing Digital",
     domain: "Commerce et Gestion",
     level: "Licence",
@@ -97,9 +111,19 @@ const mockFilieres: Filiere[] = [
     icon: Briefcase,
     isFavorite: true,
   },
-
   {
-    id: "9",
+    id: "science-economique",
+    name: "Science Economique",
+    domain: "Droit",
+    level: "Master",
+    duration: "5 ans",
+    careers: ["Avocat", "Juriste", "Notaire"],
+    demandLevel: "medium",
+    icon: Scale,
+    isFavorite: false,
+  },
+  {
+    id: "data-science",
     name: "Data Science",
     domain: "Sciences et Technologies",
     level: "Master",
@@ -150,11 +174,40 @@ const filterGroups: FilterGroup[] = [
   },
 ];
 
-export default function Filieres() {
+export default function Programs() {
+  const [searchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string[]>>({});
   const [sortBy, setSortBy] = useState("name");
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+
+  const staggerDelayClasses = [
+    "[animation-delay:0ms]",
+    "[animation-delay:80ms]",
+    "[animation-delay:160ms]",
+    "[animation-delay:240ms]",
+    "[animation-delay:320ms]",
+    "[animation-delay:400ms]",
+    "[animation-delay:480ms]",
+    "[animation-delay:560ms]",
+    "[animation-delay:640ms]",
+    "[animation-delay:720ms]",
+    "[animation-delay:800ms]",
+    "[animation-delay:880ms]",
+    "[animation-delay:960ms]",
+    "[animation-delay:1040ms]",
+    "[animation-delay:1120ms]",
+    "[animation-delay:1200ms]",
+    "[animation-delay:1280ms]",
+    "[animation-delay:1360ms]",
+    "[animation-delay:1440ms]",
+    "[animation-delay:1520ms]",
+  ] as const;
+
+  useEffect(() => {
+    const q = (searchParams.get("q") ?? "").trim();
+    if (q) setSearchQuery(q);
+  }, [searchParams]);
 
   const handleFilterChange = (groupId: string, optionId: string, checked: boolean) => {
     setSelectedFilters((prev) => {
@@ -193,10 +246,11 @@ export default function Filieres() {
       case "name":
         result.sort((a, b) => a.name.localeCompare(b.name));
         break;
-      case "demand":
+      case "demand": {
         const demandOrder = { high: 0, medium: 1, low: 2 };
         result.sort((a, b) => demandOrder[a.demandLevel] - demandOrder[b.demandLevel]);
         break;
+      }
       case "duration":
         result.sort((a, b) => a.duration.localeCompare(b.duration));
         break;
@@ -205,10 +259,11 @@ export default function Filieres() {
     return result;
   }, [searchQuery, selectedFilters, sortBy]);
 
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-
+      
       <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 pb-20">
         <div className="mb-6 md:mb-8">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
@@ -287,12 +342,18 @@ export default function Filieres() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredFilieres.map((filiere) => (
-              <FiliereCard
+            {filteredFilieres.map((filiere, index) => (
+              <div
                 key={filiere.id}
-                filiere={filiere}
-                onFavoriteToggle={(id, fav) => console.log("Toggle:", id, fav)}
-              />
+                className={`animate-fade-in-up opacity-0 translate-y-4 ${staggerDelayClasses[Math.min(index, staggerDelayClasses.length - 1)]}`}
+              >
+                <Link to={`/programs/${filiere.id}`}>
+                <FiliereCard
+                  filiere={filiere}
+                  onFavoriteToggle={(id, fav) => console.log("Toggle:", id, fav)}
+                />
+                </Link>
+              </div>
             ))}
           </div>
         </main>

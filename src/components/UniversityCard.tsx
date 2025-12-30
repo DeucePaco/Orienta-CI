@@ -31,8 +31,16 @@ export function UniversityCard({ university, onClick, onFavoriteToggle }: Univer
 
   return (
     <Card className="overflow-hidden hover-elevate cursor-pointer" onClick={onClick} data-testid={`card-univerty-${university.id}`}>
-      <div className="h-40 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-        <GraduationCap className="h-16 w-16 text-primary/40" />
+      <div className="h-40 bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center overflow-hidden">
+        {university.imageUrl ? (
+          <img 
+            src={university.imageUrl} 
+            alt={university.name}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <GraduationCap className="h-16 w-16 text-primary/40" />
+        )}
       </div>
       <CardHeader className="pb-2">
         <div className="flex items-start justify-between gap-2">

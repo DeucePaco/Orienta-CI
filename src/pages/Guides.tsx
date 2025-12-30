@@ -1,4 +1,4 @@
-import { Footer } from "@/components/Footer";
+import { Footer } from "./Footer";
 import { GuideCard, type Guide } from "@/components/GuideCard";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import Navigation from "@/components/Navigation";
@@ -59,7 +59,7 @@ const guides: Guide[] = [
 const faqs = [
   {
     question: "Comment savoir si un établissement est reconnu par l'État ?",
-    answer: "Vérifiez que l'établissement possède un agrément du Ministère de l'Enseignement Supérieur. Sur OriCI, les établissements vérifiés portent un badge de validation. En cas de doute, consultez la liste officielle du MESRS ou contactez-nous.",
+    answer: "Vérifiez que l'établissement possède un agrément du Ministère de l'Enseignement Supérieur. Sur Boy, les établissements vérifiés portent un badge de validation. En cas de doute, consultez la liste officielle du MESRS ou contactez-nous.",
   },
   {
     question: "Quelles sont les conditions générales pour obtenir une bourse ?",
@@ -70,16 +70,16 @@ const faqs = [
     answer: "Utilisez le bouton 'Signaler' présent sur chaque fiche établissement ou bourse. Notre équipe de modération examinera votre signalement sous 48h. Vous pouvez aussi nous contacter directement via le formulaire de contact.",
   },
   {
-    question: "Les informations sur OriCI sont-elles à jour ?",
+    question: "Les informations sur Boy sont-elles à jour ?",
     answer: "Nous mettons à jour notre base de données régulièrement en collaboration avec les établissements et les organismes de bourses. Les dates de dernière mise à jour sont indiquées sur chaque fiche. N'hésitez pas à nous signaler toute information obsolète.",
   },
   {
-    question: "Comment créer un compte sur OriCI ?",
+    question: "Comment créer un compte sur Boy ?",
     answer: "Cliquez sur 'Connexion' en haut de la page, puis 'Créer un compte'. Vous pouvez vous inscrire avec votre email ou via Google. Un compte vous permet de sauvegarder vos recherches et de recevoir des alertes sur les nouvelles bourses.",
   },
   {
-    question: "OriCI est-il gratuit ?",
-    answer: "Oui, OriCI est entièrement gratuit pour les étudiants et les parents. Notre mission est de démocratiser l'accès à l'information sur l'orientation scolaire en Côte d'Ivoire.",
+    question: "Boy est-il gratuit ?",
+    answer: "Oui, Boy est entièrement gratuit pour les étudiants et les parents. Notre mission est de démocratiser l'accès à l'information sur l'orientation scolaire en Côte d'Ivoire.",
   },
 ];
 

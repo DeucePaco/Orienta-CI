@@ -1,73 +1,57 @@
-# Welcome to your Lovable project
+# Orientation CI
 
-## Project info
+Application web d'orientation pour aider les étudiants à découvrir les universités, filières et formations.
 
-**URL**: https://lovable.dev/projects/e3fac732-0bf1-4d92-beb2-ac0f21d4bfd7
+## 🚀 Démarrer le projet
 
-## How can I edit this code?
+### Prérequis
 
-There are several ways of editing your application.
+- Node.js (version récente LTS)
+- npm ou pnpm ou yarn
 
-**Use Lovable**
+### Installation
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e3fac732-0bf1-4d92-beb2-ac0f21d4bfd7) and start prompting.
+```bash
+git clone <URL_DU_DEPOT>
+cd orientation-ci
+npm install
+```
 
-Changes made via Lovable will be committed automatically to this repo.
+### Lancer le serveur de développement
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+L'application sera disponible sur l'URL affichée dans le terminal (par défaut http://localhost:5173).
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
+## 🧱 Stack technique
 
 - Vite
-- TypeScript
 - React
-- shadcn-ui
+- TypeScript
 - Tailwind CSS
+- shadcn-ui
 
-## How can I deploy this project?
+## 📁 Structure générale (simplifiée)
 
-Simply open [Lovable](https://lovable.dev/projects/e3fac732-0bf1-4d92-beb2-ac0f21d4bfd7) and click on Share -> Publish.
+- `src/`
+  - `components/` – composants réutilisables (Header, Navigation, etc.)
+  - `pages/` – pages principales (Accueil, Universités, Filières, Favoris, Dashboard…)
+  - `styles/` – styles globaux
 
-## Can I connect a custom domain to my Lovable project?
+## 🧪 Scripts utiles
 
-Yes, you can!
+- `npm run dev` – lance le serveur de développement
+- `npm run build` – build de production
+- `npm run preview` – prévisualiser le build
+- `npm run lint` – lancer l'analyse ESLint
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📌 Personnalisation
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- Logo : placer votre image dans `public/` (ex: `public/BOY.jpeg`) et configurer les composants `Header` et `Navigation`.
+- Couleurs / thème : modifier la configuration Tailwind et/ou les tokens de shadcn-ui.
+
+## 📄 Licence
+
+À définir selon vos besoins (ex: MIT, propriétaire, etc.).

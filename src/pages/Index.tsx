@@ -1,12 +1,44 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { University, BookOpen, Shield, Award, TrendingUp, Users } from "lucide-react";
-import { Link } from "react-router-dom";
+import { University, BookOpen, Shield, Award, TrendingUp, Users, Search } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import heroImage from "@/assets/hero-education.jpg";
 import { Footer } from "@/pages/Footer";
+import { HowItWorks } from "@/components/HowItWorks";
+import { RecentAdditions } from "@/components/RecentAdditions";
+import { TrustSection } from "@/components/TrustSection";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const Index = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [scope, setScope] = useState<"all" | "universities" | "programs" | "bourses">("all");
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = searchQuery.trim();
+    if (!q) return;
+
+    const encoded = encodeURIComponent(q);
+    switch (scope) {
+      case "universities":
+        navigate(`/universities?q=${encoded}`);
+        break;
+      case "programs":
+        navigate(`/programs?q=${encoded}`);
+        break;
+      case "bourses":
+        navigate(`/bourses?q=${encoded}`);
+        break;
+      default:
+        navigate(`/search?q=${encoded}`);
+        break;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -20,8 +52,41 @@ const Index = () => {
             Votre Avenir Commence Ici
           </h1>
           <p className="text-base sm:text-lg md:text-xl mb-8 max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-5 duration-1000 delay-200">
-            La plateforme d'orientation scolaire et professionnelle pour les étudiants ivoiriens
+            La plateforme d'orientation universitaire et professionnelle pour les étudiants ivoiriens
           </p>
+          <form onSubmit={handleSearch} className="max-w-xl mx-auto mb-6 md:mb-8">
+            <div className="flex items-center gap-2 rounded-xl bg-white/95 backdrop-blur px-2 py-2 shadow-sm">
+              <div className="w-[170px] shrink-0">
+                <Select value={scope} onValueChange={(v) => setScope(v as typeof scope)}>
+                  <SelectTrigger className="h-10 bg-transparent border-0 focus:ring-0 focus:ring-offset-0 text-slate-900">
+                    <SelectValue placeholder="Tout" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="all">Tout</SelectItem>
+                    <SelectItem value="universities">Universités</SelectItem>
+                    <SelectItem value="programs">Filières</SelectItem>
+                    <SelectItem value="bourses">Bourses</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="relative flex-1">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder="Rechercher..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-11 h-12 text-base bg-transparent border-0 text-slate-900 placeholder:text-slate-500 focus-visible:ring-0 focus-visible:ring-offset-0"
+                  data-testid="input-hero-search"
+                />
+              </div>
+
+              <Button type="submit" className="h-10" data-testid="button-hero-search">
+                Rechercher
+              </Button>
+            </div>
+          </form>
           <div className="flex flex-col sm:flex-row gap-4 justify-center animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-300">
             <Link to="/universities">
               <Button size="lg" className="text-lg px-8">
@@ -109,7 +174,9 @@ const Index = () => {
           </Card>
         </div>
       </section>
-
+      <HowItWorks />
+      <RecentAdditions />
+      <TrustSection />
       <section className="container mx-auto px-4 py-12 md:py-16">
         <Card className="bg-gradient-to-r from-primary via-secondary to-accent text-primary-foreground border-0">
           <CardContent className="p-12 text-center">

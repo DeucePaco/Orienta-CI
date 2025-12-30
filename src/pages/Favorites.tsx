@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, University, BookOpen, Trash2 } from "lucide-react";
@@ -58,7 +59,7 @@ const Favorites = () => {
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {["Informatique et Génie Logiciel", "Gestion d'Entreprise"].map((program) => (
+                {["Informatique et Génie Logiciel", "Droit des affaires", "Medecine"].map((program) => (
                   <div key={program} className="flex items-center justify-between p-3 bg-muted rounded-lg">
                     <span className="font-medium">{program}</span>
                     <Button variant="ghost" size="icon" className="hover:text-destructive">
@@ -79,7 +80,9 @@ const Favorites = () => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button>Consulter le guide</Button>
+            <Button asChild>
+              <Link to="/guides">Consulter le guide</Link>
+            </Button>
           </CardContent>
         </Card>
       </main>
